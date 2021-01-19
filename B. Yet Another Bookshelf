@@ -1,0 +1,51 @@
+//🎯DAY 1 PROBLEM 1
+////Difficulty-800 
+//we are allowed to shift left and right any block of segment , given that the next element is 0 so the answer would be obtained by shifting the maximum block of 1s to right
+treating the block of 1s as singke 1.
+//eg : 1 1 0 0 1 1, we can move 1 1 to the left two times to obtain the contigous array of 1 
+//So, the ans would be number of zeroes b/w leftmost and rightmost 1 for normal cases
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+void tests() {
+
+       int n;
+		cin>>n;
+		int A[n+1];
+		for(int i=0;i<n;i++)
+		cin>>A[i];
+		int left1_index=-1;
+		int right1_index=-2;
+		for(int i=0;i<n;i++)
+		{
+			if(A[i]==1&&left1_index==-1)
+			left1_index=i;
+			if(A[i]==1&&left1_index!=-1)
+			right1_index=i;
+		}
+		int count=0;
+		//cout<<left1_index<<" "<<right1_index<<endl;
+		if(left1_index==-1||right1_index==-2)
+		{
+		cout<<0<<endl;
+		return;
+		}
+		for(int i=left1_index;i<=right1_index;i++)
+		{
+			if(A[i]==0)
+			count++;
+		}
+		cout<<count<<endl;
+
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+	cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
