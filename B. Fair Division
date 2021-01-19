@@ -1,0 +1,50 @@
+//DAY 1 PROBLEM 1
+//Difficulty: 800
+//The right testcase for every problem mostly to develop an algorithm is a long one . If you will use the test case 2 2 2 2 2 1 1 1 1 , then the candies given to each will be 7
+//if done equally so bob will have candies from index 2 to index 5 and remaining will be taken by alice. So, this testcase trivially suggests to use hashmap problem to
+//store the sum of prefixes, then search for a contigous block of sum as 7.
+//This method works for this question but more right method would be to use subset sum problem and find whether there is a subset of total_sum/2 in the dp table. 
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+void tests() {
+    int n;
+    cin>>n;
+    vector<int>A(n);
+    int sum=0;
+    for(int i=0;i<n;i++)
+    {
+    cin>>A[i];
+    sum+=A[i];
+    }
+    if(sum%2!=0)
+    {
+    cout<<"NO"<<endl;
+    return;
+    }
+    int half_sum=sum/2;
+    unordered_set<int>s;
+    int sum_till_now=0;
+  for(int i=0;i<n;i++)
+  {
+      sum_till_now+=A[i];
+      s.insert(sum_till_now);
+      if(s.find(sum_till_now-half_sum)!=s.end())
+      {
+          cout<<"YES"<<endl;
+          return;
+      }
+  }
+  cout<<"NO"<<endl;
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+	cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
