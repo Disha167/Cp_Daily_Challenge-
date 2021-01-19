@@ -1,0 +1,49 @@
+//DAY 3 PROBLEM 1
+//Same as the robbery problem leetcode
+//Ignoring ak+1 and ak-1 means not allowing consecutive elements, our dp condition dp[i]=max(dp[i-1], dp[i-2]+mp[i]*i); takes care of that.
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+void tests() {
+  long long n;
+  cin>>n;
+if(n==1)
+{
+    long long x;
+    cin>>x;
+    cout<<x<<endl;
+    return;
+}
+  unordered_map<long long,long long>mp;
+  for(long long i=0;i<n;i++)
+  {
+long long x;
+cin>>x;
+  mp[x]++;
+  }
+  long long dp[(int)1e5+100];
+  memset(dp,sizeof(dp),0);
+  dp[0]=0;
+  dp[1]=mp[1];
+
+  for(long long i=2;i<=1e5;i++)
+  {
+      dp[i]=max(dp[i-1], dp[i-2]+mp[i]*i);
+  }
+ cout<<dp[100000]<<endl;
+
+
+
+
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+//	cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
