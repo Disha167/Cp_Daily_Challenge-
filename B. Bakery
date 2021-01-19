@@ -1,0 +1,75 @@
+//DAY 2 PROBLEM 1
+//DIFFICULTY: 1300
+//Implementation problem using weighted graph
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+unordered_set<int>s;
+void addEdge(vector <pair<long long, long long> > adj[], int u, int v, long long wt) 
+{ 
+    adj[u].push_back(make_pair(v, wt)); 
+    adj[v].push_back(make_pair(u, wt)); 
+} 
+  
+// Print adjacency list representaion ot graph 
+void printGraph(vector<pair<long long,long long> > adj[], int V) 
+{ 
+    int v, w; 
+    long long min_weight=INT_MAX;
+    for (int u = 1; u <= V; u++) 
+    { 
+        if(s.find(u)!=s.end())
+        {
+       // cout << "Node " << u << " makes an edge with \n"; 
+        for (auto it = adj[u].begin(); it!=adj[u].end(); it++) 
+        { 
+            v = it->first; 
+            w = it->second;
+            if(s.find(v)==s.end())
+            min_weight=(min_weight<w)?min_weight:w;
+          //  cout << "\tNode " << v << " with edge weight ="
+            //     << w << "\n"; 
+        } 
+        //cout << "\n";
+        }
+    } 
+    if(min_weight!=INT_MAX)
+    cout<<min_weight<<endl;
+    else
+    cout<<-1<<endl;
+} 
+
+void tests() {
+    int n,m,k;
+ 
+    cin>>n>>m>>k;
+       vector<pair<long long, long long> > adj[n+3]; 
+    while(m--)
+    {
+        int u,v;
+        long long l;
+        cin>>u>>v>>l;
+        addEdge(adj, u, v, l); 
+    }
+    
+    s.clear();
+    for(int i=0;i<k;i++)
+    {
+        int x;
+        cin>>x;
+        s.insert(x);
+    }  
+    printGraph(adj,n);
+
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+	//cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
