@@ -1,0 +1,68 @@
+//Difficulty: 1700
+//The approach to the problem is comparatively simple than implementing it
+//Multiset is used as non-unique lelements can also be inserted unlike set
+//Key to the question: 1 element in the first pair has to be the maximum element of the array.. The second element we find by trying every element & further reducing the array
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+#define  ll long long
+void tests() {
+ll n;
+cin>>n;
+ll A[2*n+1]={0};
+multiset<ll,greater<ll>>total_elements;
+for(ll i=0;i<2*n;i++)
+{
+    cin>>A[i];
+    total_elements.insert(A[i]);
+}
+sort(A,A+2*n);
+vector<pair<ll,ll>>ans ;
+ll flag,i;
+ multiset<ll,greater<ll>>elements_on_this_rotation;
+for( i=0;i<2*n-1;i++)
+{
+    int sum_of_both_elements=A[i]+A[2*n-1];//one element will always be the maximum in array.
+    elements_on_this_rotation=total_elements;
+    flag=0;
+    ans.clear();
+    while(!elements_on_this_rotation.empty())
+    {
+        ll first_element= *(elements_on_this_rotation.begin());
+        elements_on_this_rotation.erase(elements_on_this_rotation.begin());
+        if(elements_on_this_rotation.find(sum_of_both_elements- first_element)!=elements_on_this_rotation.end())
+        {
+            ll second_element=sum_of_both_elements- first_element;
+            elements_on_this_rotation.erase(elements_on_this_rotation.find(sum_of_both_elements- first_element));
+            ans.push_back(make_pair(first_element,second_element));
+            sum_of_both_elements=max(first_element,second_element);
+        }
+        else
+        {
+            flag=1;
+            break;
+        }
+        
+    }
+    if(!flag&&elements_on_this_rotation.empty())
+    {
+    cout<<"YES"<<endl;
+    cout<<A[i]+A[2*n-1]<<endl;
+    for(auto it:ans)
+    cout<<it.first<<" "<<it.second<<endl;
+    return;
+    }
+}
+cout<<"NO"<<endl;
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+	cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
