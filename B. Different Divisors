@@ -1,0 +1,104 @@
+//Day 4 Problem 1
+//The key to the question is that we have to find the number with at least 4 divisors so to make it simple we assume exactly 4 divisors, 2 of them being 1 and the number itself 
+//and we have to find the other two such that difference between all the divisors is minimum d(given). 
+//Point to be noted is that for making the divisors difference minimum d, we consider only prime numbers as if we consider the composite numbers then the differnce might be 
+//disturbed. Eg: if the number is 24, thn divisors 1,4,7,24 that gives a minimum differnce of 3 but wait a minute!!!!!  What about the factors of 4 i.e. 2 so the difference will
+//boil down to 1 so prime nos. are used.
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+int A[100005];
+//First we generate first 10^5 prime nos.
+void prime()
+{
+    int index=0;
+    // Declare the variables
+    int a=0, b=100001, i, j;
+ 
+ 
+    // Explicitly handling the cases when a is less than 2
+    // since 0 and 1 are not prime numbers
+    if (a <= 2) {
+        a = 2;
+        if (b >= 2) {
+ 
+                A[index]=a;
+                index++;
+            a++;
+        }
+    }
+ 
+    // MAKING SURE THAT a IS ODD BEFORE WE BEGIN
+    // THE LOOP
+    if (a % 2 == 0)
+        a++;
+ 
+    // NOTE : WE TRAVERSE THROUGH ODD NUMBERS ONLY
+    for (i = a; i <= b; i = i + 2) {
+ 
+        // flag variable to tell
+        // if i is prime or not
+        bool flag = 1;
+ 
+        // WE TRAVERSE TILL SQUARE ROOT OF j only.
+        // (LARGEST POSSIBLE VALUE OF A PRIME FACTOR)
+        for (j = 2; j * j <= i; ++j) {
+            if (i % j == 0) {
+                flag = 0;
+                break;
+            }
+        }
+ 
+        // flag = 1 means i is prime
+        // and flag = 0 means i is not prime
+        if (flag == 1)
+        {
+            
+            A[index]= i;
+            index++;
+        }
+    }
+ 
+ 
+}
+ 
+void tests() {
+int d;
+cin>>d;
+int ans=1;
+//Then we iterate over the loop, and as soon as we find the difference of d, we return as we have to find the smallest ans.
+for(int i=0;i<100005;i++)
+{
+    if(A[i]-1>=d)
+    {
+       ans=ans*A[i];
+       break;
+    }
+  
+}
+  //cout<<ans<<endl;
+for(int i=0;i<100005;i++)
+{
+    if(A[i]-ans>=d)
+    {
+        ans=ans*A[i];
+        break;
+    }
+}
+ 
+cout<<ans<<endl;
+ 
+ 
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	prime();
+	int t = 1;
+	cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
