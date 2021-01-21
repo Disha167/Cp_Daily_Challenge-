@@ -1,5 +1,5 @@
 //Day 4 Problem 1
-//The key to the question is that we have to find the number with at least 4 divisors so to make it simple we assume exactly 4 divisors, 2 of them being 1 and the number itself 
+// The key to the question is that we have to find the number with at least 4 divisors so to make it simple we assume exactly 4 divisors, 2 of them being 1 and the number itself 
 //and we have to find the other two such that difference between all the divisors is minimum d(given). 
 //Point to be noted is that for making the divisors difference minimum d, we consider only prime numbers as if we consider the composite numbers then the differnce might be 
 //disturbed. Eg: if the number is 24, thn divisors 1,4,7,24 that gives a minimum differnce of 3 but wait a minute!!!!!  What about the factors of 4 i.e. 2 so the difference will
