@@ -1,0 +1,59 @@
+//Day 6 Problem 1
+//The question seems easy but here is the catch that in "ABA", both "AB" and "BA" are present but overlapping still "ABA" can either represent "AB" or "BA" so in "ABAXXXBA" .
+//If "ABA" represents "BA", then "ABAXXXBA" is invalid as there will be no count of "AB".
+//If "ABA" represents "AB", then "ABAXXXBA" is valid as there is 1 count of "AB" and one count of "BA"
+//So, we consider both the cases, searching "AB" first, then "BA"(i.e. "ABA" like character in any case will represent "AB")
+//Or, searching "BA" first,  then "AB". (i.e. "ABA" like character in any case will represent "BA")If either if them returns true, we return true.
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+#define  ll long long
+void tests() {
+ string A;
+ cin>>A;
+ int count1=0,count2=0;
+ if(A.length()<=3)
+ {
+     cout<<"NO"<<endl;
+     return;
+ }
+ for(int i=0;i<A.size();i++)
+ {
+     if(count1==0&&A[i]=='A'&&A[i+1]=='B')
+     {
+         count1++;
+         i+=2;
+     }
+     if(count1>0&&A[i]=='B'&&A[i+1]=='A')
+     {
+         cout<<"YES"<<endl;
+         return;
+     }
+ }
+ count1=0;
+  for(int i=0;i<A.size();i++)
+ {
+     if(count1==0&&A[i]=='B'&&A[i+1]=='A')
+     {
+         count1++;
+         i+=2;
+     }
+     if(count1>0&&A[i]=='A'&&A[i+1]=='B')
+     {
+         cout<<"YES"<<endl;
+         return;
+     }
+ }
+ cout<<"NO"<<endl;
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+	//cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
