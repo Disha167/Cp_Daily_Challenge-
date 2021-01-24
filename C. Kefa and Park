@@ -1,0 +1,52 @@
+//Difficulty: 1500
+//We have to do dfs traversal, if we get more than m consecutive cats, we return otherwise if we reach leaf node(this can be determined by checking whether
+//😇adj[curr_vertex].size()==1 as leaf node can have at most 1 neighbour), then we increment our answer by 1 and return ans at end.
+
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+#define  ll long long
+vector<ll>adj[200005];
+ll cat_present[200005]={0};
+ll no_of_vertices=0, max_cats_limit=0;
+int ans=0;
+void dfs(int curr_vertex, int parent, int count_of_cats)
+{
+   if(cat_present[curr_vertex]==1) count_of_cats+=1;
+   else
+   count_of_cats=0;
+   if(count_of_cats>max_cats_limit)
+   return;
+   if(adj[curr_vertex].size()==1&&curr_vertex!=1) ans++;
+   for(auto it:adj[curr_vertex])
+   {
+       if(it==parent)continue;
+       dfs(it ,curr_vertex,count_of_cats);
+   }
+      
+}
+void tests() {
+ cin>>no_of_vertices>>max_cats_limit;
+ for(int i=1;i<=no_of_vertices;i++)
+ cin>>cat_present[i];
+ for(int i=1;i<no_of_vertices;i++)
+ {
+     int u,v;
+     cin>>u>>v;
+     adj[u].push_back(v);
+     adj[v].push_back(u);
+ }
+ dfs(1,0,0);
+ cout<<ans<<endl;
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+	//cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
