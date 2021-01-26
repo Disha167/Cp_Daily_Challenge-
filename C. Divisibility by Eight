@@ -1,0 +1,68 @@
+//  We use the property of divisibility of 8 that a number is divisible by 8 if it's last 3 digits is divisible by 8 so we check all the 1 digit, 2 digit , 3 digit numbers that
+//can be formed from the number i.e. divisible by 8
+#include <bits/stdc++.h>
+#include<ctype.h>
+using namespace std;
+#define endl '\n'
+#define ll long long
+void tests() {
+string x;
+cin>>x;
+//single digit
+for(int i=0;i<x.length();i++)
+{
+    if((x[i]-'0')%8==0)
+    {
+        cout<<"YES"<<endl;
+        cout<<x[i]-'0'<<endl;
+        return;
+    }
+}
+
+for(int i=0;i<x.length();i++)
+{
+    if((x[i]-'0')%8==0)
+    continue;
+    for(int j=i+1;j<x.length();j++)
+    {
+        int num=(x[i]-'0')*10 + (x[j]-'0');
+        if(num%8==0)
+        {
+            cout<<"YES"<<endl;
+            cout<<num<<endl;
+            return;
+        }
+    }
+}
+for(int i=0;i<x.length();i++)
+{
+    if((x[i]-'0')%8==0)
+    continue;
+      for(int j=i+1;j<x.length();j++)
+    {
+        for(int k=j+1;k<x.length();k++)
+        {
+        int num=(x[i]-'0')*100 + (x[j]-'0')*10 + (x[k]-'0');
+        if(num%8==0)
+        {
+            cout<<"YES"<<endl;
+            cout<<num<<endl;
+            return;
+        }
+        }
+    }
+    
+}
+cout<<"NO"<<endl;
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+	//cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
