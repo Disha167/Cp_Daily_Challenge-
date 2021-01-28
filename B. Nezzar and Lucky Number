@@ -1,0 +1,55 @@
+//Based on a certain observation that for eg. if d=7 then all nos above 70 can be made by the digits containing at least one 7 similar to the process as we make the numbers less
+//than 70 a sum of all numbers having 7. Eg : we have to make 41 then we reduce 10 from the number untill it becomes divisible by 7 i.e. 21 i.e. 41 will be represented as 
+// 7 + 7 + 27 for the answer(20 is 2 times reducing 10 from the number) . And, by the same concept 121 will also be expressed as a sum of lucky nos as 7 + 7 + 87 so we can
+//add any digit before 7 so it is possible to represent any number above 70 as sum of lucky nos. But 11 cannot be represented as sum of lucky nos. so we have to check for the
+//values less than 70.
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+#define ll long long
+
+void tests() {
+int q,d;
+cin>>q>>d;
+while(q--)
+{
+    ll x;
+    cin>>x;
+    int flag=0;
+   if(x>=d*10)
+   {
+       flag=1;
+   }
+   else
+   {
+   while(x>0)
+   {
+       if(x%d==0)
+       {
+           flag=1;
+           break;
+       }
+       x-=10;
+   }
+   }
+   if(flag==1)
+   cout<<"YES"<<endl;
+   else
+   cout<<"NO"<<endl;
+}
+
+
+
+
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+	cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
