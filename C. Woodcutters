@@ -1,0 +1,54 @@
+//Day 10 Problem 1 
+//Here, we follow a greedy approach to solve this problem we first fell every tree to the left, if it cannot fall to the left, we make it fall to the right after checking the 
+//condition whether the co-ordinate +height< next coordinate, it always gives the optimal answer as the tree which we could not take will be compensated by it's next right tree
+//and we always try the left part first.
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+#define ll long long
+void tests() {
+int n;
+cin>>n;
+ll coordinate[n+1],height[n+1];
+
+for(int i=0;i<n;i++)
+cin>>coordinate[i]>>height[i];
+if(n==1||n==2)
+{
+    cout<<n<<endl;
+    return;
+}
+//first tree will always fall
+int count_of_fell_trees=1;
+ll last_occupied=coordinate[0];
+for(int i=1;i<n-1;i++)
+{
+    if(last_occupied<(coordinate[i]-height[i]))//left fell
+    {
+        count_of_fell_trees++;
+        last_occupied=coordinate[i];
+    }
+    else if((coordinate[i]+height[i])<coordinate[i+1])//right fell
+    {
+        count_of_fell_trees++;
+        last_occupied=coordinate[i]+height[i];
+    }
+    else//not fell
+    {
+        last_occupied=coordinate[i];
+    }
+}
+cout<<count_of_fell_trees+1<<endl;//last tree always fall
+
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+//	cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
