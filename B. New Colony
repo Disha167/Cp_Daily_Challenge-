@@ -1,0 +1,50 @@
+//Simply we do brute force, for every k, we keep on increasing the height & if we encounter -1 once also, i.e. the boulder goes into waste collection so all the boulders after that
+//will go to the boulder collection so we return without checking the k's after that.
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+#define ll long long
+void tests() {
+ll n,k;
+cin>>n>>k;
+int h[n+1];
+for(int i=0;i<n;i++)
+cin>>h[i];
+int ans=0;
+for(int i=0;i<k;i++)
+{
+    for(int j=0;j<n;)
+    {
+        
+       if(j<n-1&&(h[j]<h[j+1]))
+       {
+            ans=j+1;
+            h[j]=h[j]+1;
+            break;
+       }
+       else if(h[j]>=h[j+1])
+       {
+           j++;
+       }
+       else if(j==n-1)
+       {
+           ans=-1;
+           break;
+       }
+    }
+    if(ans==-1)
+    break;
+}
+cout<<ans<<endl;
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+	cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
