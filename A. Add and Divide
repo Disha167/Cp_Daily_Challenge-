@@ -1,0 +1,62 @@
+//Day 12 Problem 1
+//The idea behind the solution is that the maximum value of b is 10^9 and if we take a as least value 2 then log base2(10^9) is 30 so by performing 30 operations(of a/b) in 
+//total 10^9 the biggest no. can be reduced to 0. So, always we will increment b lesser than 30 as if we increment b by 30 and then divide a by b to make it 0, we have already 
+//exceeded the maximum number of operations so it's better to just divide and reduce it to 0,we will get lesser no. of operations.
+//So, we derive the conclusion that b can only be extended upto 30, to give minimum no. of operations, so for every b from 0 to 30 , we check by using how many counts we
+//can make a 0 and then take minimum of all those.
+#include <bits/stdc++.h>
+using namespace std;
+#define endl '\n'
+#define ll long long 
+void tests()
+{
+ll a,b;
+cin>>a>>b;
+int count=0,ans=INT_MAX,flag=0;
+if(b==1)
+{
+        b++;
+    for (int i=1;i<=30;i++)
+    {
+        int num=a;
+        count=i;
+      while(num>0)
+      {
+          num=num/b;
+          count++;
+      }
+        ans=min(ans,count);
+        b=b+1;
+    }
+}
+else
+{
+     for (int i=0;i<=30;i++)
+    {
+        int num=a;
+        count=i;
+      while(num>0)
+      {
+          num=num/b;
+          count++;
+      }
+        ans=min(ans,count);
+        b=b+1;
+    }
+}
+if(flag==1)
+ans++;
+cout<<ans<<endl;
+ 
+}
+int32_t main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	int t = 1;
+	cin>>t;
+	while(t--){
+		tests();
+	}
+    return 0 ; 
+}
